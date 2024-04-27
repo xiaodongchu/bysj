@@ -1,0 +1,12 @@
+uvicorn[standard]~=0.20.0
+fastapi[all]~=0.103.0
+pymysql~=1.0.2
+starlette~=0.27.0
+pyperclip~=1.8.2
+pyjwt~=2.8.0
+authing~=5.1.0
+redis~=5.0.3
+sqlalchemy~=2.0.25
+pydantic~=2.5.3
+weasyprint~=61.2
+loguru~=0.5.3
