@@ -1,7 +1,9 @@
-from fastapi import HTTPException
-from database.models import *
-from pydantic import BaseModel
 from typing import Literal
+
+from fastapi import HTTPException
+from pydantic import BaseModel
+
+from database.models import *
 
 
 async def add_user(authing_id: str):
@@ -22,7 +24,6 @@ class AddConsentForm(BaseModel):
 
 
 async def add_consent_form(user: UserInfo, add_data: AddConsentForm):
-    add_data.my_init()
     if user.id not in add_data.permission_list:
         add_data.permission_list.append(user.id)
     constent = ConsentForm(

@@ -10,7 +10,7 @@ const store = createStore({
             search_type: 'unsigned',
             home_cards: [],
             hospital_name: "医院",
-            inform:[],
+            inform: [],
         };
     },
     mutations: {
@@ -40,7 +40,7 @@ const store = createStore({
         set_hospital_name(state, hospital_name) {
             state.hospital_name = hospital_name;
         },
-        set_inform(state, inform_list){
+        set_inform(state, inform_list) {
             state.inform = inform_list
         }
     },

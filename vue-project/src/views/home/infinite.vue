@@ -44,8 +44,8 @@ function click_sign(self_id) {
   router.push(s)
 }
 
-function click_signed(self_id) {
-  const s = {path: '/signed/' + self_id}
+function click_signed(self_id, permission) {
+  const s = {path: '/signed/' + self_id, query: {'permission': permission}}
   router.push(s)
 }
 
@@ -121,7 +121,11 @@ async function click_delete(self_class, self_id) {
             <!-- 未签署的返回内容一定有权 -->
             <!-- 可下载：有权的已签署 -->
             <el-button v-if="item.have_permission && item.self_class === 'signed'" type="success"
-                       @click="click_signed(item.self_id)">查看与下载
+                       @click="click_signed(item.self_id, true)">查看与下载
+            </el-button>
+            <!-- 可查看脱敏数据：无权的已签署 -->
+            <el-button v-else-if="item.self_class === 'signed'" type="success"
+                       @click="click_signed(item.self_id, false)">查看模板
             </el-button>
             <!-- 可编辑：未签署、模板 -->
             <el-button v-if="item.self_class === 'unsigned' || item.self_class === 'template'" type="primary"

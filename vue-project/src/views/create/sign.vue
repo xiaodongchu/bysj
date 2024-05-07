@@ -8,7 +8,7 @@ const router = useRouter()
 const route = useRoute()
 
 onMounted(() => {
-  if (route.query.base_type && route.query.base_id) {
+  if (route.query.base_type && route.query.base_id && route.query.base_id !== '0') {
     form.base_type = route.query.base_type
     form.base_id = route.query.base_id
     form.link = '/' + route.query.base_type + '/' + route.query.base_id
@@ -43,10 +43,10 @@ async function remoteMethod(query) {
 
 const onSubmit = async () => {
   console.log(form)
-  if(!form.base_id) {
+  if (!form.base_id) {
     form.base_id = "0"
   }
-  if(!form.patient_birth) {
+  if (!form.patient_birth) {
     form.patient_birth = new Date().toISOString().slice(0, 10)
   }
   const res = await create_sign(form)

@@ -1,9 +1,11 @@
 import asyncio
 import traceback
 from time import time
+
 import jwt
 from authing import AuthenticationClient
 from authing import ManagementClient
+
 from database.models import my_redis
 
 

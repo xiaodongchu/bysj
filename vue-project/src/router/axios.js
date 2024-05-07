@@ -1,9 +1,8 @@
 import axios from 'axios';
-import router from "@/router"
 import {ElNotification} from "element-plus";
-import {logOut,unVerify} from "@/router/log_out.js";
+import {logOut, unVerify} from "@/router/log_out.js";
 
-// export const base_url = 'localhost:8082/'
+// export const base_url = 'http://localhost:8082/'
 export const base_url = 'https://chuxiaodong.top/'
 
 const success_response = function (response) {

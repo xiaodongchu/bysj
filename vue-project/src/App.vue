@@ -10,10 +10,9 @@ const store = useStore()
 const router = useRouter()
 
 onMounted(async () => {
-  if(!localStorage._authing_token){
+  if (!localStorage._authing_token) {
     await router.push('/login')
-  }
-  else{
+  } else {
     const res = await getSelfBaseProfile()
     store.commit('set_user_verify', res.data['user_verify'])
     store.commit('set_user_name', res.data['user_name'])

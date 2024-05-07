@@ -10,6 +10,7 @@ const active = ref(6)
 const route = useRoute()
 const signed_id = ref('')
 const pre_html = ref('')
+const permission = route.query.permission === 'true' || route.query.permission === true;
 
 onMounted(async () => {
   signed_id.value = route.params.id
@@ -48,8 +49,10 @@ async function copy_pdf_link() {
       <el-step title="完成"/>
     </el-steps>
   </div>
-  <el-button style="margin: 20px" type="success" @click="open_pdf">打开pdf</el-button>
-  <el-button style="margin: 20px" type="success" @click="copy_pdf_link">复制下载链接</el-button>
+  <div v-if="permission" style="width: 100%">
+    <el-button style="margin: 20px" type="success" @click="open_pdf">打开pdf</el-button>
+    <el-button style="margin: 20px" type="success" @click="copy_pdf_link">复制下载链接</el-button>
+  </div>
   <div style="width: 100%;margin: 20px">
     <el-scrollbar>
       <div v-html="pre_html"></div>
