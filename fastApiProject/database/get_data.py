@@ -1,11 +1,10 @@
 import os
 from copy import deepcopy
-
-from fastapi import HTTPException
-from sqlalchemy import desc, and_, or_
-from pydantic import BaseModel
 from typing import Literal
 
+from fastapi import HTTPException
+from pydantic import BaseModel
+from sqlalchemy import desc, and_, or_
 from weasyprint import HTML
 
 from database.models import *
@@ -360,7 +359,11 @@ async def get_consent_form_html(consent_form_id: int, user: UserInfo, sign_data:
     if not consent:
         raise HTTPException(status_code=404, detail="Consent not found")
     if not consent.check_permission(user.id):
-        raise HTTPException(status_code=403, detail="Permission denied")
+        if not consent.is_signed:
+            raise HTTPException(status_code=403, detail="Permission denied")
+        data = consent.to_template_dict()
+        html = template.render(data=data)
+        return html
     if consent.is_signed and consent.raw_html:
         return consent.raw_html
     data = consent.to_ditail_dict()

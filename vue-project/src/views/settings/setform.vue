@@ -68,7 +68,7 @@ function pop_box() {
 
 async function onSubmit() {
   await updateUserSetting(form)
-  if(!form.user_verify) {
+  if (!form.user_verify) {
     unVerify()
   }
   await reset()
@@ -77,7 +77,7 @@ async function onSubmit() {
 }
 
 async function onCancel() {
-  if(form.user_verify){
+  if (form.user_verify) {
     router.back()
   }
 }
@@ -86,7 +86,7 @@ function refresh() {
   location.reload()
 }
 
-function onLogOut(){
+function onLogOut() {
   logOut()
 }
 

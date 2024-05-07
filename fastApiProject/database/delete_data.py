@@ -1,4 +1,5 @@
 from fastapi import HTTPException
+
 from database.models import *
 
 

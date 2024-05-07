@@ -1,4 +1,5 @@
 import random
+
 from pyperclip import copy
 
 pinyin_list = list("āáǎàōóǒòēéěèīíǐìūúǔùǖǘǚǜü")

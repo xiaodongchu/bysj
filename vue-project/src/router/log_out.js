@@ -13,7 +13,7 @@ export function logOut() {
     router.replace('/login').then()
 }
 
-export function unVerify(){
+export function unVerify() {
     store.commit('set_user_verify', false)
     store.commit('set_search_content', '')
     store.commit('set_search_type', 'unsigned')

@@ -8,7 +8,7 @@ const router = useRouter()
 const route = useRoute()
 
 onMounted(() => {
-  if (route.query.base_type && route.query.base_id) {
+  if (route.query.base_type && route.query.base_id && route.query.base_id !== '0') {
     form.base_type = route.query.base_type
     form.base_id = route.query.base_id
     form.link = '/' + route.query.base_type + '/' + route.query.base_id
@@ -27,7 +27,7 @@ const form = reactive({
 })
 
 const onSubmit = async () => {
-  if(!form.base_id) {
+  if (!form.base_id) {
     form.base_id = "0"
   }
   const res = await create_template(form)

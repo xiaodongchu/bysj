@@ -8,7 +8,7 @@ const store = useStore()
 const select = ref('unsigned')
 const input = ref('')
 
-onMounted(() =>{
+onMounted(() => {
   do_search().then()
 })
 

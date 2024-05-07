@@ -1,14 +1,13 @@
 import datetime
 import json
 import random
+from typing import List, Optional
 
 import redis
+from pydantic import BaseModel as PydanticBaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Enum, DateTime, Boolean, Text, ForeignKey, Table
 from sqlalchemy.dialects.mysql import LONGTEXT
 from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session, Relationship
-from typing import List, Optional
-from pydantic import BaseModel as PydanticBaseModel
-
 
 my_redis = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
@@ -192,7 +191,7 @@ class ConsentForm(Base):
         DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now, comment="最后更新时间")
     last_update_user_name = Column(Text, comment="最后更新用户名")
     update_data = Column(LONGTEXT, default="", comment="更新记录")
-    status = Column(Boolean(), default=True, nullable=False, comment="未删除")
+    status = Column(Boolean, default=True, nullable=False, comment="未删除")
 
     def to_search_dict(self):
         if self.is_signed:
@@ -245,6 +244,19 @@ class ConsentForm(Base):
             "last_update_time": datatime_to_str(self.last_update_time, chinese=True, time=True),
             "last_update_user_name": self.last_update_user_name,
             "update_data": json_load(self.update_data)
+        }
+
+    def to_template_dict(self):
+        return {
+            "hospital_name": self.hospital_name,
+            "surgery_name": self.surgery_name,
+            "disease_name": self.disease_name,
+            "anesthesia_type": self.anesthesia_type,
+            "surgery_intro": self.surgery_intro,
+            "risk_intro": self.risk_intro,
+            "risk_list": json_load(self.risk_list),
+            "patient_choice": json_load(self.patient_choice),
+            "doctor_state": self.doctor_state
         }
 
     def check_permission(self, user_id):

@@ -1,9 +1,10 @@
-from database.models import session, UserInfo, Inform, ConsentForm, ConsentTemplate, str_to_datatime, Base, engine
-from my_test.data import data
-from file_manager import path_now
-from user import authing_server
 import base64
 import json
+
+from database.models import session, UserInfo, Inform, ConsentForm, ConsentTemplate, str_to_datatime, Base, engine
+from file_manager import path_now
+from my_test.data import data
+from user import authing_server
 
 
 def init_user():
