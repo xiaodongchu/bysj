@@ -1,0 +1,14 @@
+[Unit]
+Description=FastapiApp
+After=network.target
+
+[Service]
+User=azureuser
+WorkingDirectory=/home/azureuser/fast_api_pro/
+ExecStart=/usr/bin/python3 -m app
+StandardOutput=/home/azureuser/fast_api_pro/log/app.log
+StandardError=/home/azureuser/fast_api_pro/log/app.err
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

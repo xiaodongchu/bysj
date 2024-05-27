@@ -8,12 +8,6 @@ __pycache__
 # temp
 temp
 
-# fonts
-fonts
-*.ttf
-*.otf
-*.ttc
-
 # logs
 logs
 log
