@@ -266,7 +266,7 @@ class UpdateInform(BaseModel):
 async def admin_update_inform(inform_id: int, inform_data: UpdateInform):
     if not inform_data.img_b64.startswith("data:image/jpeg;base64,"):
         inform_data.img_b64 = ""
-    if inform_id > 0:
+    if inform_id >= 0:
         inform = session.query(Inform).filter(Inform.id == inform_id).first()
         if not inform:
             raise HTTPException(status_code=404, detail="Inform not found")

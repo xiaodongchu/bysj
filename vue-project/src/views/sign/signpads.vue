@@ -28,10 +28,6 @@ const change_choice = (val) => {
   form.other_sign = val !== '0';
 }
 
-function to_next_page() {
-  router.replace('/signed/' + edit_id.value)
-}
-
 async function submit() {
   if (form.patient_sign === '' || form.doctor_sign === '') {
     ElMessage.error('请签名')
@@ -45,7 +41,8 @@ async function submit() {
   }
   await post_sign(edit_id.value, form)
   ElMessage.success('签署成功')
-  to_next_page()
+  const s = {path: '/signed/' + edit_id.value, query: {'permission': 'true'}}
+  await router.replace(s)
 }
 
 async function open_dialog() {

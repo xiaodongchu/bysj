@@ -10,7 +10,7 @@ const activeName = ref('userinfo')
 <template>
   <div style="width: 100%;">
     <el-tabs v-model="activeName" class="demo-tabs" type="border-card">
-      <el-tab-pane label="管理用户" name="userinfo">
+      <el-tab-pane label="用户管理" name="userinfo">
         <userinfo></userinfo>
       </el-tab-pane>
       <el-tab-pane label="通知管理" name="inform">

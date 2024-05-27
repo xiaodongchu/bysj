@@ -4,11 +4,11 @@ import {delete_inform, get_inform, post_inform} from "@/views/admin/admin.js";
 import {ElMessage} from "element-plus";
 
 const result = ref([])
-const edit_inform_id = ref(0)
+const edit_inform_id = ref(-1)
 const dialogFormVisible = ref(false)
 
 const form = reactive({
-  inform_id: 0,
+  inform_id: -1,
   title: '',
   img_b64: '',
   url: "",
@@ -24,6 +24,7 @@ async function do_search() {
 
 async function click_edit(row) {
   edit_inform_id.value = row.inform_id
+  form.inform_id = row.inform_id
   form.title = row.title
   form.img_b64 = row.img_b64
   form.url = row.url
@@ -44,8 +45,8 @@ function click_cancel() {
   dialogFormVisible.value = false
 }
 
-async function click_delete() {
-  let res = await delete_inform(edit_inform_id.value)
+async function click_delete(row) {
+  let res = await delete_inform(row.inform_id)
   await do_search()
 }
 
@@ -122,7 +123,7 @@ onMounted(async () => {
         <el-table-column fixed="right" label="操作" width="160">
           <template #default="{row}">
             <el-button type="warning" @click="click_edit(row)">操作</el-button>
-            <el-button type="danger" @click="click_delete">删除</el-button>
+            <el-button type="danger" @click="click_delete(row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>

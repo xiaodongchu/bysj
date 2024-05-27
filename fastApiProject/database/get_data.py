@@ -87,6 +87,7 @@ async def get_inform_list(info_len: int = 3, limit=True):
         inform_list = session.query(Inform).order_by(desc(Inform.create_time)).all()
     return [
         {
+            "inform_id": inform.id,
             "title": inform.title,
             "img_b64": inform.img_b64,
             "url": inform.url,
@@ -374,8 +375,8 @@ async def get_consent_form_html(consent_form_id: int, user: UserInfo, sign_data:
         data['other_sign_info'] = sign_data.other_sign_info
         data['patient_sign'] = sign_data.patient_sign
         data['doctor_sign'] = sign_data.doctor_sign
-        data['patient_sign_date'] = datetime.datetime.now()
-        data['doctor_sign_date'] = datetime.datetime.now()
+        data['patient_sign_date'] = get_time_now_str(time=True, chinese=True)
+        data['doctor_sign_date'] = get_time_now_str(time=True, chinese=True)
     html = template.render(data=data)
     return html
 

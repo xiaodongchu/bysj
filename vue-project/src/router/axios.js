@@ -50,6 +50,9 @@ const failure_response = function (error) {
 
 //统一Axios请求配置
 function apiAxios(axiosConfig) {
+    // 保证url最后加上斜杠，且url中无重复斜杠
+    axiosConfig.url += '/'
+    axiosConfig.url = axiosConfig.url.replace(/\/{2,}/g, '/')
     const service = axios.create({
         baseURL: base_url, // 设置统一的请求前缀
         timeout: 30000, // 设置统一的超时时长

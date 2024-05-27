@@ -99,7 +99,7 @@ const form = defineModel()
           </div>
         </td>
         <td colspan="2">
-          <p class="patient_info_title">签名日期</p>
+          <p class="patient_info_title">签名时间</p>
         </td>
       </tr>
       <tr id="table line 7">
@@ -121,7 +121,7 @@ const form = defineModel()
           <p class="patient_info_title">医生签名</p>
         </td>
         <td colspan="2">
-          <p class="patient_info_title">签名日期</p>
+          <p class="patient_info_title">签名时间</p>
         </td>
       </tr>
       <tr id="table line 10">

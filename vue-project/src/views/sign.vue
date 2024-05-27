@@ -11,7 +11,8 @@ const route = useRoute()
 function next() {
   active.value++
   if (active.value >= 6) {
-    router.replace('/signed/' + route.params.id)
+    const s = {path: '/signed/' + route.params.id, query: {'permission': 'true'}}
+    router.replace(s)
   }
 }
 
@@ -150,6 +151,9 @@ async function form_init() {
           <div class="subform">
             <div v-for="(item, index) in form.special_risk_list" :key="'p-{{index}}'" class="parent">
               <el-text>{{ item.text }}</el-text>
+              <div v-for="(item_child, index_child) in item.children" :key="'c-{{index_child}}'" class="child">
+                <el-text>{{ item_child.text }}</el-text>
+              </div>
             </div>
           </div>
         </el-form-item>

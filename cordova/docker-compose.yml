@@ -1,0 +1,20 @@
+version: '3'
+services:
+  docker-cordova:
+    image: 'beevelop/cordova:latest'
+    container_name: cordova
+    privileged: true
+    volumes:
+      - "D:/bysj/git/cordova/dist/:/dist/"
+      - "D:/bysj/git/cordova/output/:/output/"
+      - "D:/bysj/git/cordova/myApp/:/myApp/"
+      - "D:/bysj/git/cordova/myAdmin/:/myAdmin/"
+      - "D:/bysj/git/cordova/myDoctor/:/myDoctor/"
+      - "D:/bysj/git/cordova/myNurse/:/myNurse/"
+      - "D:/bysj/git/cordova/init.sh:/init.sh"
+      - "D:/bysj/git/cordova/build.sh:/build.sh"
+      - "D:/bysj/git/cordova/icon.png:/icon.png"
+    command: bash
+    stdin_open: true
+    tty: true
+    
