@@ -11,7 +11,7 @@ const router = useRouter()
 
 onMounted(async () => {
   if (!localStorage._authing_token) {
-    await router.push('/login')
+    await router.replace('/login')
   } else {
     const res = await getSelfBaseProfile()
     store.commit('set_user_verify', res.data['user_verify'])
@@ -31,7 +31,7 @@ onMounted(async () => {
         type: 'warning',
         duration: 0,
       })
-      await router.replace({path: '/settings'})
+      await router.replace('/settings')
     }
   }
 })

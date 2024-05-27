@@ -52,7 +52,7 @@ const onSubmit = async () => {
   const res = await create_sign(form)
   const new_id = res.data['new_id']
   ElMessage.success('创建成功')
-  await router.push('/edit/unsigned/' + new_id)
+  await router.replace('/edit/unsigned/' + new_id)
 }
 
 const onCancel = () => {

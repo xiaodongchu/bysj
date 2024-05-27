@@ -73,12 +73,12 @@ async function onSubmit() {
   }
   await reset()
   ElMessage.success('更新成功')
-  await onCancel()
+  onCancel()
 }
 
-async function onCancel() {
+function onCancel() {
   if (form.user_verify) {
-    router.back()
+    router.replace('/')
   }
 }
 
