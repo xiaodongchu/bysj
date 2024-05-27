@@ -60,34 +60,38 @@ class AuthingServer:
     def verify_id_token_hs256(self, token):
         if token is None or len(token) < 20:
             return None
-        re_d = {"authing_id": "", "email": "", "phone": "", }
         try:
             decoded = jwt.decode(token, self.__app_secret, algorithms=["HS256"], audience=self.__app_id)
             current_time = time()
             if current_time < decoded['exp']:
-                re_d['authing_id'] = decoded['sub']
-                re_d['email'] = decoded['email']
-                re_d['phone'] = decoded['phone_number']
-                my_redis.set(token, re_d['authing_id'], ex=3600)
+                authing_id = decoded['sub']
+                if authing_id:
+                    re_d = {'authing_id': authing_id,
+                            'email': decoded['email'],
+                            'phone': decoded['phone_number']
+                            }
+                    my_redis.set(token, re_d['authing_id'], ex=3600)
+                    return re_d
         except:
             pass
-        return re_d
+        return None
 
     def verify_id_token_hs256_redis(self, token):
         if token is None or len(token) < 20:
             return None
         if my_redis.exists(token):
             return my_redis.get(token)
-        authing_id = ""
         try:
             decoded = jwt.decode(token, self.__app_secret, algorithms=["HS256"], audience=self.__app_id)
             current_time = time()
             if current_time < decoded['exp']:
                 authing_id = decoded['sub']
-                my_redis.set(token, authing_id, ex=3600)
+                if authing_id:
+                    my_redis.set(token, authing_id, ex=3600)
+                    return authing_id
         except:
             pass
-        return authing_id
+        return None
 
     def get_authing_id_by_access(self, token):
         # 获取用户 ID

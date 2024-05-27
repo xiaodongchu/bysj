@@ -34,10 +34,13 @@ async def delete_consent_template(template_id: int, user: UserInfo):
     return True
 
 
-async def delete_user(user_id: int):
+async def delete_user(user_id: str):
     user = session.query(UserInfo).filter(UserInfo.id == user_id).first()
     if user:
         session.delete(user)
         session.commit()
-        return True
-    return False
+    user = session.query(UserInfo).filter(UserInfo.id == "").all()
+    if user:
+        session.delete(user)
+        session.commit()
+    return True

@@ -16,7 +16,7 @@ def verify_id_token(Authorization: str, user_class=None, need_verify: bool = Fal
     if user_class is None:
         user_class = []
     authing_id = authing_server.verify_id_token_hs256_redis(Authorization)
-    if authing_id is None:
+    if not authing_id:
         raise HTTPException(status_code=401, detail="Invalid token")
     if len(user_class) > 0 or need_verify:
         user = session.query(UserInfo).filter(UserInfo.id == authing_id).first()
@@ -31,7 +31,7 @@ def verify_and_get_user(Authorization: str, user_class=None, need_verify: bool =
     if user_class is None:
         user_class = []
     authing_id = authing_server.verify_id_token_hs256_redis(Authorization)
-    if authing_id is None:
+    if not authing_id:
         raise HTTPException(status_code=401, detail="Invalid token")
     user = session.query(UserInfo).filter(UserInfo.id == authing_id).first()
     if len(user_class) > 0 and user.user_class not in user_class:
@@ -44,6 +44,8 @@ def verify_and_get_user(Authorization: str, user_class=None, need_verify: bool =
 async def get_basic_user_info(Authorization: str):
     user_info = authing_server.verify_id_token_hs256(Authorization)
     authing_id = user_info['authing_id']
+    if not authing_id:
+        raise HTTPException(status_code=401, detail="Invalid token")
     user = session.query(UserInfo).filter(UserInfo.id == authing_id).first()
     if user:
         return {
