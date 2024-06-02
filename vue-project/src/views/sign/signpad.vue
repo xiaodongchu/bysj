@@ -38,7 +38,7 @@ function unlock_pad() {
 <template>
   <div style="width: 100%">
     <div class="box">
-      <VueSignaturePad ref="signaturePad" height="180px" width="360px"></VueSignaturePad>
+      <VueSignaturePad ref="signaturePad" height="180px" width="300px"></VueSignaturePad>
     </div>
     <el-row class="end-button">
       <el-col :span="8">
@@ -55,7 +55,7 @@ function unlock_pad() {
 
 <style scoped>
 .box {
-  width: 360px;
+  width: 300px;
   height: 180px;
   border: 1px solid black;
   background-color: #FAFCFF;

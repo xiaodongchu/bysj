@@ -169,9 +169,9 @@ async function form_init() {
         <el-form-item label="知情选择">
           <div class="subform">
             <div v-for="item in form.patient_choice" class="choose-for">
-              <el-checkbox class="long-check-box">
+              <div class="long-check-box">
                 <el-text>{{ item.text }}</el-text>
-              </el-checkbox>
+              </div>
             </div>
           </div>
         </el-form-item>
@@ -252,6 +252,7 @@ async function form_init() {
 .long-check-box {
   width: 100%;
   margin: 5px;
+  padding: 5px;
   white-space: normal;
   word-wrap: break-word;
   word-break: break-word;
